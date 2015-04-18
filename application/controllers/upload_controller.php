@@ -18,15 +18,16 @@ class Upload_Controller extends CI_Controller {
 				'error' => ' ' 
 		) );
 	}
-	public function do_upload() {
+	public function do_upload($user_name = '') {
 		$base_path = "uploads";
 		$file_name = date ( 'Y-m-d' );
-		
+		$time = date('his');
+                
 		$length = 16;
 		
 		$randomString = substr ( str_shuffle ( ",.!?@#$%^&*()0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" ), 0, $length );
 		
-		$file_pass = hash ( "sha256", $file_name . "_data_" . $randomString );
+		$file_pass = hash ( "sha256", $user_name . "_data_" . $randomString );
 		
 		$tmp_folder_name = "./" . $base_path . "/" . $file_name;
 		mkdir ( $tmp_folder_name );
@@ -66,14 +67,23 @@ class Upload_Controller extends CI_Controller {
 		
 		$this->load->library ( 'ciqrcode' );
 		
-		$params ['data'] = $this->config->base_url () . $base_path . "/" . $file_name . "_data.pak";
+		$params ['data'] = $this->config->base_url () . $base_path . "/" .$user_name.'_'. $file_name .'_'.$time. "_data.pak";
 		$params ['level'] = 'H';
 		$params ['size'] = 10;
 		$params ['savename'] = $tmp_folder_name . "/" . 'qrcode.png';
 		$this->ciqrcode->generate ( $params );
 		
-		system ( 'cd ' . $tmp_folder_name . ' && zip -P ' . $file_pass . ' -r ../' . $file_name . '_data.pak *' );
+		exec ( 'cd ' . $tmp_folder_name . ' && zip -P ' . $file_pass . ' -r ../' .$user_name.'_'. $file_name.'_'.$time . '_data.pak *' );
 		echo $randomString;
+                $db_data=array(
+                    'Upload_Date' => $file_name,
+                    'Upload_User' => $user_name,
+                    'File_Name' => $user_name.'_'. $file_name.'_'.$time. "_data.pak",
+                    'Random_Code' => base64_encode($randomString)
+                );
+                
+                $this->load->model('Upload_model');
+                $this->Upload_model->insert_filepath_data($db_data);
 		/*
 		 * $this->load->library('zip');
 		 * $this->zip->read_dir($tmp_folder_name."/",FALSE);

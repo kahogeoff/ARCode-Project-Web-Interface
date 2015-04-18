@@ -25,6 +25,6 @@ class Upload_model extends CI_Model {
     
     function insert_filepath_data($data)
     {
-        
+        $this->db->insert('filepath', $data);
     }
 }
