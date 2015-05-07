@@ -38,9 +38,11 @@
 |
 */
 
+$route['data/view/(:any)'] = 'upload_controller/view_upload_item/$1'; 
+$route['data/view'] = 'upload_controller/view_upload_list'; 
+$route['data/upload/(:any)'] = 'upload_controller/$1'; 
+$route['data/upload'] = 'upload_controller/file_view'; 
 $route['default_controller'] = "welcome";
-$route['upload_data'] = 'upload_controller/file_view'; 
-$route['upload_data/(:any)'] = 'upload_controller/$1'; 
 $route['404_override'] = '';
 
 

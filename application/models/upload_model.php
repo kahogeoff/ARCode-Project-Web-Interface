@@ -17,14 +17,28 @@ class Upload_model extends CI_Model {
         $this->load->database();
     }
     
-    function get_filepath_data()
+    function get_filepath_data($id = FALSE)
     {
-        $query = $this->db->get('filepath');
-        return $query;
+        if($id === FALSE)
+        {
+            $query = $this->db->get('filepath');
+            return $query->result_array();
+        }else{
+            $query = $this->db->get_where('filepath', array('ID' => $id));
+            return $query->row_array();
+        }
     }
     
     function insert_filepath_data($data)
     {
         $this->db->insert('filepath', $data);
+    }
+    
+    function remove_filepath_data($id) {
+        $query = $this->db->get_where('filepath', array('ID' => $id));
+        $tmp = $query->row_array(); 
+        $this->db->delete('filepath', array('ID' => $id));
+        
+        return $tmp['File_Name'];
     }
 }
