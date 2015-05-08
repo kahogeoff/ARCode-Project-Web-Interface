@@ -1,6 +1,8 @@
 <html>
     <head>
         <title>Upload Form</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     </head>
 
     <body>
@@ -11,17 +13,56 @@
             });
         </script>
 
-        <?php echo validation_errors(); ?>
-        <?php echo form_open_multipart('upload_controller/do_upload'); ?>
-        3D model: <?php echo "<input type='file' name='3Dfile' size='20' accept='.obj,.jpg,.png'>"; ?>
-        <br />
-        Data file: <?php echo "<input type='file' name='XMLfile' size='20' accept='.xml,.jpg,.png'>"; ?>
-        <br />
-        Note:
+        <?php $this->load->helper('url'); ?>
         <br>
-        <?php echo "<textarea rows='4' cols='50' name='note' maxlength='140' style='resize:none'></textarea>"; ?>
-        <br>
-        <?php echo "<input type='submit' name='submit' value='upload' /> "; ?>
-        <?php echo "</form>" ?>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Upload package</h3>
+                </div>
+                <div class="panel-body">
+                    <?php
+                    if (strlen($error) > 0) {
+                        echo
+                        "<div class='alert alert-danger' role='alert'>"
+                        . $error
+                        . "</div>";
+                    }
+                    ?>
+
+                    <?php
+                    echo
+                    validation_errors("<div class='alert alert-danger alert-dismissible' role='alert'>"
+                            . "<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"
+                            . "<span class='sr-only'>Error:</span> "
+                            . "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"
+                            , "</div>");
+                    ?>
+
+
+                    <?php echo form_open_multipart('upload_controller/do_upload'); ?>
+                    <div class="form-group">
+                        <label for="3DfileField">3D model</label>
+                        <?php echo "<input type='file' name='3Dfile' size='20' id='3DfileField' accept='.obj,.jpg,.png'>"; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="3DfileField">Data file</label>
+                        <?php echo "<input type='file' name='XMLfile' size='20' id='DatafileField' accept='.xml,.jpg,.png'>"; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <p><label for="NoteField">Note</label></p>
+                        <?php echo "<textarea rows='4' class='form-control' name='note' maxlength='220' style='resize:none' id='NoteField' placeholder='Input some notes'></textarea>"; ?>
+                    </div>
+
+                    <?php echo "<input type='submit' name='submit' value='Upload' class='btn btn-primary'/>"; ?>
+                    <?php echo "<input type='reset' name='reset' value='Reset' class='btn btn-default'/>"; ?>
+                    
+                    <?php echo "</form>" ?>
+                </div>
+            </div>
+        </div>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </body>
 </html>

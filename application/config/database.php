@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost:8889';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'qqkk8964uaccab';
+$db['default']['password'] = 'qqkk8964p0011008uaccab';
 $db['default']['database'] = 'arcode_project';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = 'ar_';
