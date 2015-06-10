@@ -61,7 +61,7 @@ class Upload_Controller extends CI_Controller {
 
             $this->load->library('ciqrcode');
 
-            $encoded_path = base64_encode($this->config->base_url() . "uploads/" . $user_name . '_' . $file_name . '_' . $time . "_data.pak");
+            $encoded_path = "arcode;".base64_encode($this->config->base_url() . "uploads/" . $user_name . '_' . $file_name . '_' . $time . "_data.pak");
 
             $params ['data'] = $encoded_path;
             $params ['level'] = 'M';
@@ -112,6 +112,12 @@ class Upload_Controller extends CI_Controller {
         $data['info_item'] = $this->Upload_model->get_filepath_data($id);
 
         $this->load->view('items/view', $data);
+    }
+    
+    public function get_data_for_unity($name) {
+        $this->load->model('Upload_model');
+        $data['info_item'] = $this->Upload_model->get_filepath_data_for_unity($name);
+        $this->load->view('items/UnityRequest', $data);
     }
 
     function handle_model_upload() {

@@ -12,33 +12,37 @@
  * @author geoffreycheung
  */
 class Upload_model extends CI_Model {
+
     function __construct() {
         parent::__construct();
         $this->load->database();
     }
-    
-    function get_filepath_data($id = FALSE)
-    {
-        if($id === FALSE)
-        {
+
+    function get_filepath_data($id = FALSE) {
+        if ($id === FALSE) {
             $query = $this->db->get('filepath');
             return $query->result_array();
-        }else{
+        } else {
             $query = $this->db->get_where('filepath', array('ID' => $id));
             return $query->row_array();
         }
     }
-    
-    function insert_filepath_data($data)
-    {
+
+    function get_filepath_data_for_unity($name) {
+        $query = $this->db->get_where('filepath', array('File_Name' => $name));
+        return $query->row_array();
+    }
+
+    function insert_filepath_data($data) {
         $this->db->insert('filepath', $data);
     }
-    
+
     function remove_filepath_data($id) {
         $query = $this->db->get_where('filepath', array('ID' => $id));
-        $tmp = $query->row_array(); 
+        $tmp = $query->row_array();
         $this->db->delete('filepath', array('ID' => $id));
-        
+
         return $tmp['File_Name'];
     }
+
 }

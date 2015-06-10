@@ -38,7 +38,8 @@
 |
 */
 
-$route['data/view/(:any)'] = 'upload_controller/view_upload_item/$1'; 
+$route['data/view/unity/(:any)'] = 'upload_controller/get_data_for_unity/$1'; 
+$route['data/view/(:num)'] = 'upload_controller/view_upload_item/$1'; 
 $route['data/view'] = 'upload_controller/view_upload_list'; 
 $route['data/upload/(:any)'] = 'upload_controller/$1'; 
 $route['data/upload'] = 'upload_controller/file_view'; 
