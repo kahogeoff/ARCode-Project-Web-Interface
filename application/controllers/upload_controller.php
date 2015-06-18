@@ -65,13 +65,29 @@ class Upload_Controller extends CI_Controller {
 
             $params ['data'] = $encoded_path;
             $params ['level'] = 'M';
-            $params ['size'] = 10;
+            $params ['size'] = 3;
             $params ['savename'] = $tmp_folder_name . "/" . 'qrcode.png';
             $this->ciqrcode->generate($params);
 
-            $im = file_get_contents($tmp_folder_name . "/" . 'qrcode.png');
-            $imdata = base64_encode($im);
+            //$im = file_get_contents($tmp_folder_name . "/" . 'qrcode.png');
+            $dest = imagecreatefrompng("asset/img/" . 'template.png');
+            $src = imagecreatefrompng($tmp_folder_name . "/" . 'qrcode.png');
+            
+            imagealphablending($dest, false);
+            imagesavealpha($dest, true);
 
+            imagecopymerge($dest, $src, 234, 234, 0, 0, 147, 147, 100); //have to play with these numbers for it to work for you, etc.
+            
+            //header('Content-Type: image/png');
+            imagepng($dest,$tmp_folder_name . "/" . 'arcode.png');
+            
+            $imdata = base64_encode(file_get_contents($tmp_folder_name . "/" . 'arcode.png'));
+            
+            imagedestroy($dest);
+            imagedestroy($src);
+
+            unlink($tmp_folder_name . "/" . 'qrcode.png');
+            
             exec('cd ' . $tmp_folder_name . ' && zip -P ' . $file_pass . ' -r ../' . $user_name . '_' . $file_name . '_' . $time . '_data.pak *');
             //echo $randomString;
             $db_data = array(
