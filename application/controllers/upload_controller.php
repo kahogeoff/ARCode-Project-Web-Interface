@@ -35,6 +35,8 @@ class Upload_Controller extends CI_Controller {
 
         $tmp_folder_name = "./uploads/" . $file_name.'_'.$time;
         mkdir($tmp_folder_name);
+        mkdir($tmp_folder_name.'/model');
+        mkdir($tmp_folder_name.'data');
 
         $upload_config = array(
             'upload_path' => $tmp_folder_name,

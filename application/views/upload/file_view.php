@@ -43,7 +43,7 @@
                     <?php echo form_open_multipart('upload_controller/do_upload'); ?>
                     <div class="form-group">
                         <label for="3DfileField">3D model</label>
-                        <?php echo "<input type='file' name='3Dfile' size='20' id='3DfileField' accept='.obj,.jpg,.png'>"; ?>
+                        <?php echo "<input type='file' name='modelFiles[]' size='20' id='3DfileField' accept='.obj,.jpg,.png'>"; ?>
                     </div>
 
                     <div class="form-group">
