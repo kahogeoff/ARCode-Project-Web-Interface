@@ -9,7 +9,9 @@
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script>
             $(document).ready(function () {
-                $('form').trigger("reset");
+                $('input[type!="button"][type!="submit"][type!="reset"], select, textarea')
+                    .val('')
+                    .blur();
             });
         </script>
 
@@ -41,13 +43,19 @@
 
 
                     <?php echo form_open_multipart('upload_controller/do_upload'); ?>
-                    <div class="form-group">
-                        <label for="3DfileField">3D model</label>
+                    <div class="form-group" id='should_append'>
+                        <label for="3DfileField">3D model 
+                            <a href="#" id='add_btn'>
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                <span class="sr-only">Add File</span>
+                            </a>
+                        </label>
                         <?php echo "<input type='file' name='modelFiles[]' size='20' id='3DfileField' accept='.obj,.jpg,.png'>"; ?>
+                        
                     </div>
 
                     <div class="form-group">
-                        <label for="3DfileField">Data file</label>
+                        <label for="DatafileField">Data file</label>
                         <?php echo "<input type='file' name='XMLfile' size='20' id='DatafileField' accept='.xml,.jpg,.png'>"; ?>
                     </div>
 
@@ -64,5 +72,11 @@
             </div>
         </div>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script>
+            $("#add_btn").on("click", function()
+            {
+                $("#should_append").append("<input type='file' name='modelFiles[]' size='20' id='3DfileField' accept='.obj,.jpg,.png'>");
+            });
+        </script>
     </body>
 </html>
