@@ -3,6 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Applications/MAMP/htdocs/projects/arcode_web/application/config/mimes.php</file>
+            <file>file:/Applications/MAMP/htdocs/projects/arcode_web/application/views/upload/file_view.php</file>
             <file>file:/Applications/MAMP/htdocs/projects/arcode_web/application/controllers/upload_controller.php</file>
         </group>
     </open-files>

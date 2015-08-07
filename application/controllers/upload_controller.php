@@ -167,7 +167,8 @@ class Upload_Controller extends CI_Controller {
                 
                 imagedestroy($img);
                 ////////////////////////////////////////////////////////////////
-                
+                echo 'Uploaded<br>';
+                $mod_id += 1;
                 $config['file_name'] = "model_".$mod_id;
                 $this->upload->initialize($config);
                 if ($this->upload->do_upload("models[]")) {
