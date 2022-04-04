@@ -1,6 +1,8 @@
 # README #
 
-Nothing need to write.
+Back-end/Web-based management system for my Bachelor degree's final project.
+
+Please check out [this document](https://drive.google.com/file/d/1FSHJS-JyWSrFGa7tKe5kOQhZQB_ugqce/view?usp=sharing) (Chinese) to learn more about this system. 
 
 ### TODO ###
 
